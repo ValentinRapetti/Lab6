@@ -1,3 +1,14 @@
+#'greedy_knapsack
+#'
+#'
+#'This function implements a knapsack algorithm using a greedy approach.
+#'Calculates the value, weight ratio of each element in the data frame x and fills the the output set whith the first p
+#'elements, ordered according to the ratio, whose weights sum is less than the maximum W
+#'
+#'@param x data frame
+#'@param W maximum weight
+#'@return list object
+#'@export 
 greedy_knapsack<-function(x,W){
   x['id']<-1:nrow(x)
   x['ratio']<- x$v/x$w

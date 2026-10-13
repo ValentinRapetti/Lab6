@@ -1,3 +1,17 @@
+#'knapsack dynamic
+#'
+#'
+#'This function implements a knapsack algorithm using a dynamic programming solution.
+#'The function works when the weights are all positive integers.
+#'At first the function creates the matrix m whose elements m[i,w] are 
+#'the maximum value that can be attained with weight less than or equal to w.
+#'Then starting from the matrix returns the list of the elements whose values sum
+#'is the maximum and weights sum is less than the maximum weight W  
+#'
+#'@param x data frame
+#'@param W maximum weight
+#'@return list object
+#'@export 
 knapsack_dynamic <- function(x,W){
   n<-nrow(x)
   m <- matrix(0, nrow = (n+1), ncol = W+1 )

@@ -1,11 +1,14 @@
-RNGversion(min(as.character(getRversion()),"3.5.3"))
-set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
-n <- 2000
-knapsack_objects <- data.frame(w = sample(1:4000, size = n, replace = TRUE),
-                               v = runif(n = n, 0, 10000))
-
-
-
+#'brute_force_knapsack
+#'
+#'
+#'This function implements a knapsack algorithm using a brute force approach.
+#'It analyses the all the possible combination of objects in the data frame x and find the one with the maximum value
+#'and whose weights sum is less than the maximum weight W
+#'
+#'@param x data frame
+#'@param W maximum weight
+#'@return list object
+#'@export 
 brute_force_knapsack <- function(x,W){
   # to do: input validation
   final_value<- 0
@@ -34,3 +37,6 @@ brute_force_knapsack <- function(x,W){
   names(output)<-c('value','elements')
   return(output)
 }
+
+
+
