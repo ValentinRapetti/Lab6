@@ -30,7 +30,7 @@ brute_force_knapsack <- function(x,W){
       final_list<-append(final_list, k)
     }
   }
-  output<- list(final_value,final_list)
+  output<- list(as.integer(final_value),final_list)
   names(output)<-c('value','elements')
   return(output)
 }
