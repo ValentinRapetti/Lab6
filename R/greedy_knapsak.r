@@ -10,6 +10,7 @@
 #'@return list object
 #'@export 
 greedy_knapsack<-function(x,W){
+  stopifnot(is.data.frame(x), ncol(x)==2, all(x$v) >=0, all(x$w)>=0)
   x['id']<-1:nrow(x)
   x['ratio']<- x$v/x$w
   x<-x[order(x$ratio, decreasing = TRUE),]

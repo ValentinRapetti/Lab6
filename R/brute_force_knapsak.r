@@ -10,7 +10,7 @@
 #'@return list object
 #'@export 
 brute_force_knapsack <- function(x,W){
-  # to do: input validation
+  stopifnot(is.data.frame(x), ncol(x)==2, all(x$v) >=0, all(x$w)>=0)
   final_value<- 0
   lista<-c()
   n<- nrow(x)
