@@ -2,7 +2,7 @@
 % Please edit documentation in R/knapsack_dynamic.r
 \name{knapsack_dynamic}
 \alias{knapsack_dynamic}
-\title{knapsack dynamic}
+\title{Dynamic knapsack}
 \usage{
 knapsack_dynamic(x, W)
 }
