@@ -22,6 +22,8 @@ profiling <- function(n=100000, limit=16, W=3500, fun="brute") {
         greedy_knapsack( knapsack_objects[1:limit, ], W=W )
     else if( fun=="dynamic" )
         knapsack_dynamic( knapsack_objects[1:limit, ], W=W )
+    else if( fun=="fast" )
+        knapsack_dynamic( knapsack_objects[1:limit, ], W=W, fast=TRUE )
 
     #Finish the profiling
     Rprof(NULL)

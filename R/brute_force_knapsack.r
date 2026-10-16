@@ -24,7 +24,7 @@ brute_force_knapsack <- function(x,W){
     # we update our results
     for (i in 1:2^n) {
         i <- as.integer(intToBits(i))[1:n]
-        weight <- sum(i * x$w)
+        weight <- sum(i * x$w)  # t(i) %*% x$w
 
         if (weight < W){
             value <- t(i) %*% x$v

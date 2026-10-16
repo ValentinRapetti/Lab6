@@ -4,12 +4,16 @@
 \alias{knapsack_dynamic}
 \title{Dynamic knapsack}
 \usage{
-knapsack_dynamic(x, W)
+knapsack_dynamic(x, W, recursive = FALSE, fast = FALSE)
 }
 \arguments{
 \item{x}{data frame}
 
 \item{W}{maximum weight}
+
+\item{recursive}{bool choose which R implementation to use}
+
+\item{rcpp}{bool choose whether to use C++ implementation}
 }
 \value{
 list object
