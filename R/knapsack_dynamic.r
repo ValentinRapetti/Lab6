@@ -10,7 +10,7 @@
 #'@param x data frame
 #'@param W maximum weight
 #'@param recursive bool choose which R implementation to use
-#'@param rcpp bool choose whether to use C++ implementation
+#'@param fast bool choose whether to use C++ implementation
 #'@return list object
 #'@export
 knapsack_dynamic <- function(x,W, recursive=FALSE, fast=FALSE) {

@@ -13,7 +13,7 @@ knapsack_dynamic(x, W, recursive = FALSE, fast = FALSE)
 
 \item{recursive}{bool choose which R implementation to use}
 
-\item{rcpp}{bool choose whether to use C++ implementation}
+\item{fast}{bool choose whether to use C++ implementation}
 }
 \value{
 list object

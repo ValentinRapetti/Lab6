@@ -1,5 +1,5 @@
 ---
-title: "lab_report_knapsack"
+title: "Knapsack Problem - Lab report"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{lab_report_knapsack}
@@ -37,7 +37,7 @@ The package can be installed with the following command.
 
 brute_force_knapsack(x, W) : Returns a list with the "value" and "elements" of the solution found using brute force.
 
-knapsack_dynamic(x, W) : Returns a list with the "value" and "elements" of the solution found using a dynamic knapsack.
+knapsack_dynamic(x, W, recursive, fast) : Returns a list with the "value" and "elements" of the solution found using a dynamic knapsack.
 
 greedy_knapsack(x, W) : Returns a list with the "value" and "elements" of the solution found using the greedy algorithm.
 
@@ -67,12 +67,17 @@ Getting a correct result doesn't necesarily imply that our functions are good. I
 
 ## Brute force:
 ```{r, eval=TRUE}
-system.time( brute_force_knapsack( knapsack_objects[1:20, ], W=3500 ) )
+system.time( brute_force_knapsack( knapsack_objects[1:16, ], W=3500 ) )
 ```
 
 ## Dynamic:
 ```{r, eval=TRUE}
 system.time( knapsack_dynamic( knapsack_objects[1:500, ], W=35000 ) )
+```
+
+And for our RCpp implementation:
+```{r, eval=TRUE}
+system.time( knapsack_dynamic( knapsack_objects[1:500, ], W=35000, fast=TRUE ) )
 ```
 
 ## Greedy algorithm: 
@@ -87,11 +92,8 @@ system.time( greedy_knapsack( knapsack_objects[1:1000000, ], W=350000000 ) )
 In order to find the sections of code that consume the most time, and thus need optimization, we utilized the R profiler.
 
 ## Brute force:
-```{r, eval=FALSE}
-profiling(n=100, limit=20, fun="brute", W=3500)
-```
-```{r out.width = '90%', echo = FALSE}
-knitr::include_graphics("img/profile_brute.png")
+```{r, eval=TRUE}
+profiling(n=100, limit=16, fun="brute", W=3500)
 ```
 
 We can see that the most time-consuming lines are all in the section of code trying to find the best combination. These lines are (in order): doing vector multiplications, calculating and assigning a binary list, and implementing an if and for. 
@@ -106,12 +108,17 @@ knitr::include_graphics("img/profile_dynamic.png")
 
 In this case we see that the main bottleneck relies on a comparison that is being done for every single element of the 1000x35000 matrix.
 
-## Greedy algorithm:
-```{r, eval=FALSE}
-profiling(n=1000000, limit=1000000, fun="greedy", W=350000000)
+### C++ implementation
+
+```{r, eval=TRUE}
+profiling(n=1000, limit=500, fun="fast", W=35000)
 ```
-```{r out.width = '90%', echo = FALSE}
-knitr::include_graphics("img/profile_greedy.png")
+
+We can see that the RCpp implementation is much faster than it's R counterpart. It is more than 40x faster. We can also see that according to Rprof, the RCpp implementation does not use any memory, however that figure should not be trusted, as the code is still using the same 500x35000 matrix. Furthermore, we cannot use line profiling in this case as we have a compiled program.
+
+## Greedy algorithm:
+```{r, eval=TRUE}
+profiling(n=1000000, limit=1000000, fun="greedy", W=350000000)
 ```
 
 Lastly, we see that in the greedy algorithm the main issue is adding the new weights and values to an existing list.
